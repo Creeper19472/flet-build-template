@@ -51,7 +51,7 @@ dependency_overrides:
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.1
-  flutter_native_splash: ^2.4.1
+  flutter_native_splash: ^2.4.6
   flutter_lints: ^2.0.0
 
 flutter:
