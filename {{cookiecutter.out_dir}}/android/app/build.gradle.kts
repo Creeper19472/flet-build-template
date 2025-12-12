@@ -27,8 +27,8 @@ android {
             useLegacyPackaging = true
             keepDebugSymbols += listOf(
                 "*/arm64-v8a/libpython*.so",
-                "*/armeabi-v7a/libpython*.so",
-                "*/x86/libpython*.so",
+                // "*/armeabi-v7a/libpython*.so",
+                // "*/x86/libpython*.so",
                 "*/x86_64/libpython*.so",
             )
         }
@@ -68,7 +68,7 @@ android {
             {% if cookiecutter.options.target_arch %}
             abiFilters += listOf({% for arch in cookiecutter.options.target_arch %}"{{ arch }}"{% if not loop.last %}, {% endif %}{% endfor %})
             {% else %}
-            abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
+            abiFilters += listOf("arm64-v8a", "x86_64") // "armeabi-v7a", 
             {% endif %}
         }
 // flet: end of split_per_abi {% endif %}
