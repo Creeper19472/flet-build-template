@@ -9,7 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:serious_python/serious_python.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:window_manager/window_manager.dart';
 
 import "python.dart";
@@ -37,7 +37,7 @@ show_startup_screen: {{ show_startup_screen }}
 startup_screen_message: {{ startup_screen_message }}
 */
 
-const bool isProduction = bool.fromEnvironment('dart.vm.product');
+const bool isRelease = bool.fromEnvironment('dart.vm.product');
 
 const assetPath = "app/app.zip";
 const pythonModuleName = "{{ cookiecutter.python_module_name }}";
@@ -120,7 +120,7 @@ void main(List<String> args) async {
 }
 
 Future prepareApp() async {
-  if (!_args.contains("--debug")) {
+  if (!_args.contains("--debug") && isRelease) {
     // ignore: avoid_returning_null_for_void
     debugPrint = (String? message, {int? wrapWidth}) => null;
   } else {
@@ -134,7 +134,7 @@ Future prepareApp() async {
     pageUrl = Uri.base.toString();
     var routeUrlStrategy = getFletRouteUrlStrategy();
     if (routeUrlStrategy == "path") {
-      setPathUrlStrategy();
+      usePathUrlStrategy();
     }
   } else if (_args.isNotEmpty && isDesktopPlatform()) {
     // developer mode
